@@ -1,0 +1,23 @@
+{
+  "name": "tcplib",
+  "version": "1.0.0",
+  "description": "expose volatiles surfaces in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/VolatilesLighting/nodeTcpLib.git"
+  },
+  "keywords": [
+    "node",
+    "tcp"
+  ],
+  "author": "volatiles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VolatilesLighting/nodeTcpLib/issues"
+  },
+  "homepage": "https://github.com/VolatilesLighting/nodeTcpLib#readme"
+}

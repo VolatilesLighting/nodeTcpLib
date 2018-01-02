@@ -1,0 +1,61 @@
+{
+  "getallscenes": {
+    "path": "/scenes/full",
+    "method": "GET"
+  },
+  "getallplaylists": {
+    "path": "/playlist/full",
+    "method": "GET"
+  },
+  "autoscenes": {
+    "path": "/autoscenes",
+    "method": "GET"
+  },
+  "getscene": {
+    "path": "/scenes/",
+    "method": "GET"
+  },
+  "filterscenes": {
+    "path": "/scenes/",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "buyscene": {
+    "path": "/scene/buy/",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "createuser": {
+    "path": "/user",
+    "method": "PUT",
+    "contentType": "json"
+  },
+  "getuser": {
+    "path": "/user",
+    "method": "GET"
+  },
+  "updateuser": {
+    "path": "/user",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "changepassword": {
+    "path": "/p/user",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "resetpassword": {
+    "path": "/user/forgot/password",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "senddiagnostics": {
+    "path": "/diagnostics/",
+    "method": "POST",
+    "contentType": "json"
+  },
+  "firmwareversion": {
+    "path": "/firmware/version",
+    "method": "GET"
+  }
+}

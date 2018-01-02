@@ -1,0 +1,37 @@
+{
+  "tcpconfig": {
+    "settings":{
+      "decryptionRetrys" : 3,
+      "timeout": 3000,
+      "retrys": 5,
+      "delay": 1000,
+
+    },
+    "ports" :{
+      "master" : 5557,
+      "visitor" : 5556,
+      "public" : 5555
+    },
+    "finalFailTimeout": 60000
+  },
+  "backend": {
+    "host": "https://staging-volasystems.de:8443",
+    "downloadRetries": 5,
+    "trusty": false
+
+  },
+  "udp": {
+    "port": 30718,
+    "packetPing": "000000f6",
+    "packetAnswer": "000000f7",
+    "delay": 100,
+    "timeout": 2000
+  },
+  "update":{
+    "chunk_size": 4096,
+    "useHex": true,
+    "timeout": 30000,
+    "delay": 2000,
+    "retrys":10
+  }
+}

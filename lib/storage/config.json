@@ -1,0 +1,4 @@
+{
+  "sharedPreferencesName": "mySharedPrefs",
+  "keychainService": "myKeychain"
+}
