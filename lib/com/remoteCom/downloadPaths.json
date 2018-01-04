@@ -1,6 +1,0 @@
-{
-  "scene": {"remote":"/scenes/fetch/","local": "/scenes/"},
-  "playlists": {"remote":"/playlist/fetch/","local": "/playlists/"},
-  "firmware": {"remote":"/firmware/fetch","local": "/firmware/"},
-  "picture":{"remote":"","local": "/pictures"}
-}

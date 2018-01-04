@@ -2,8 +2,9 @@
   "name": "tcplib",
   "version": "1.0.0",
   "description": "expose volatiles surfaces in node",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
+    "hello": "./node_modules/.bin/babel-node ./playground/run.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,12 +13,34 @@
   },
   "keywords": [
     "node",
-    "tcp"
+    "tcp",
+    "voaltiles"
   ],
   "author": "volatiles",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/VolatilesLighting/nodeTcpLib/issues"
   },
-  "homepage": "https://github.com/VolatilesLighting/nodeTcpLib#readme"
+  "homepage": "https://github.com/VolatilesLighting/nodeTcpLib#readme",
+  "dependencies": {
+    "adler32": "^0.1.7",
+    "babel-polyfill": "^6.26.0",
+    "crypto": "^1.0.1",
+    "js-crc": "^0.2.0",
+    "netaddr": "^1.1.0",
+    "network": "^0.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2017",
+      "stage-0"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1"
+  }
 }

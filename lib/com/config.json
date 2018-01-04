@@ -4,8 +4,7 @@
       "decryptionRetrys" : 3,
       "timeout": 3000,
       "retrys": 5,
-      "delay": 1000,
-
+      "delay": 1000
     },
     "ports" :{
       "master" : 5557,
@@ -18,7 +17,6 @@
     "host": "https://staging-volasystems.de:8443",
     "downloadRetries": 5,
     "trusty": false
-
   },
   "udp": {
     "port": 30718,
