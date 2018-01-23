@@ -4,8 +4,8 @@
   "description": "expose volatiles surfaces in node",
   "main": "./src/index.js",
   "scripts": {
-    "hello": "./node_modules/.bin/babel-node ./playground/run.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tcp": "./node_modules/.bin/babel-node ./src/run.js"
+
   },
   "repository": {
     "type": "git",
