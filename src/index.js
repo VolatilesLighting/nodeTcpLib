@@ -1,7 +1,7 @@
-import tcp from '../lib/com/surfaceCom/manageTCP';
-import surfaceCall2Cmd from '../lib/com/surfaceCom/surfaceCall2Cmd';
-import discoverSurfacesPre from '../lib/com/surfaceCom/discoverSurfaces';
-import uploadToSurface from '../lib/com/surfaceCom/uploadToSurface';
+import tcp from './lib/com/surfaceCom/manageTCP';
+import surfaceCall2Cmd from './lib/com/surfaceCom/surfaceCall2Cmd';
+import discoverSurfacesPre from './lib/com/surfaceCom/discoverSurfaces';
+import uploadToSurface from './lib/com/surfaceCom/uploadToSurface';
 
 
 
@@ -35,7 +35,6 @@ async function makeTcp({mac,ip,cmd,val,key, keyType,settings,self}) {
     if(mac)
         return resp;
     return resp.response
-
 }
 
 export default {

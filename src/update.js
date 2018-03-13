@@ -1,5 +1,5 @@
 
-import updateFirmware from './updateFirmware'
+import updateFirmware from './lib/com/surfaceCom/updateFirmware'
 
 const firmware ='',
 ip ='',

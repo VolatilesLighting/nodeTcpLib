@@ -107,7 +107,7 @@ const tcpHandler = async(ip, port, req, done, settings) => {
 };
 
 
-const dotcp = (ip, port, messsage, settings, i) => {
+const dotcp = (ip, port, message, settings, i) => {
     return new Promise((resolve, reject) => {
         let done = false;
         //console.time('tcp')
@@ -116,7 +116,7 @@ const dotcp = (ip, port, messsage, settings, i) => {
 
              */
             if (settings.log)
-                console.log('connPre', ip, port, settings.timeout);
+                console.log('connPre', ip, port, settings.timeout,message);
 
 
             const timedOut = setTimeout(() => {
@@ -134,7 +134,7 @@ const dotcp = (ip, port, messsage, settings, i) => {
                 //client.connect(port, '192.168.1.183', () => {
                 if (settings.log)
                     console.log('conn', ip, port);
-                client.write(messsage);
+                client.write(message);
             });
 
 
