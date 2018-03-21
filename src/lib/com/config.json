@@ -4,7 +4,8 @@
       "decryptionRetrys" : 3,
       "timeout": 3000,
       "retrys": 5,
-      "delay": 1000
+      "delay": 1000,
+      "port":5555
     },
     "ports" :{
       "master" : 5557,

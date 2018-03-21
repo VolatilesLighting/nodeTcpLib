@@ -33,13 +33,14 @@ export default async function ({cb,single}) {
         netInfo.broadcastIP = single;
 
     await new Promise(resolve => {
-        server.bind(config.port, netInfo.ip, function () {
+        server.bind(config.port+1, netInfo.ip, function () {
             resolve();
         });
     });
 
     server.setBroadcast(true);
     server.on('message', function (messagein, {address : ip_address}) {
+        //console.log(messagein.toString('hex'))
         const messagehex = new Buffer(messagein).toString('hex'),
             msg = messagehex.substring(0, 8),
             id = messagehex.substring(48, 60);

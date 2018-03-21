@@ -39,6 +39,37 @@ export default {
                 reject(e)
             }
         })
+    },
+    encryptServer: (message, keyIn,iv) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const key = new Buffer(keyIn, 'hex'),
+                    cipher = crypto.createCipheriv('aes-128-cfb', key, iv);
+                cipher.setAutoPadding(false);
+                let enc = cipher.update(message, 'utf8', 'hex');
+
+                resolve(new Buffer(enc, 'hex'))
+            }
+
+            catch (e) {
+                reject(e)
+            }
+        })
+    },
+    decryptServer:(enc, keyIn, iv) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const key = new Buffer(keyIn, 'hex'),
+                    decipher = crypto.createDecipheriv('aes-128-cfb', key, iv);
+                let recv = decipher.update(enc);
+                decipher.setAutoPadding(false);
+                recv += decipher.final('utf8');
+                //console.log('dfds',recv)
+                resolve(recv.slice(recv.indexOf('{"')))
+            } catch (e) {
+                reject(e)
+            }
+        })
     }
 
 }

@@ -10,22 +10,24 @@ const v = {
         // set_overlay:0
     }
 }
-tt1('192.168.1.239', v)
+tt1('192.168.2.116', v)
 
 
 function tt1(ip, v) {
     //console.log('go')
-    //tcp('192.168.2.160', {get_pub_info: null}, false, '', {}, {
+    tcp(ip, v, '10a58869d74be5a374cf867cfb473859', 'master', {}, {
+    //tcp(ip, v, '', '', {}, {
+    //tcp('192.168.2.116', {get_pub_info: null}, '10a58869d74be5a374cf867cfb473859', 'master', {}, {
     // tcp('192.168.2.164', {get_surface_info: null}, false, '', {}, {
     // tcp('192.168.2.159', {set_overlay: null}, false, '', {}, {
-    tcp(ip, v, false, '', {}, {
+    //tcp(ip, v, false, '', {}, {
         //tcp(ip, {get_installed_scenes: null}, false, '', {}, {
         //tcp('192.168.2.160', {get_pub_info: null}, false, 'master', {}, {
         "decryptionRetrys": 3,
         "timeout": 5000,
-        "retrys": 50,
+        "retrys": 10,
         "delay": 500,
-        log: false
+        log: true
     }, null).then(data => {
 
         //console.log(data)

@@ -4,9 +4,11 @@
   "description": "expose volatiles surfaces in node",
   "main": "./src/index.js",
   "scripts": {
+    "dev": "babel-watch src/play.js",
+    "find": "./node_modules/.bin/babel-node ./src/volatool.js find",
     "tcp": "./node_modules/.bin/babel-node ./src/run.js",
     "proxy": "./node_modules/.bin/babel-node ./src/proxy.js",
-    "build": "babel src --out-dir out --copy-files && webpack-cli ./out/volatool.js -o ./dist/volaTool  && pkg ./dist/volaTool --targets node8-macos,node8-win,node8-linux -o dist/volaTool --debug",
+    "build": "babel src --out-dir out --copy-files && webpack-cli ./out/volatool.js -o ./out/volaTool  && pkg ./out/volaTool --targets node8-macos,node8-win,node8-linux -o dist/volaTool --debug",
     "webpack": "webpack"
   },
   "repository": {
@@ -33,11 +35,16 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "bunyan": "^1.8.12",
     "console.table": "^0.10.0",
     "crypto": "^1.0.1",
+    "fs-extra": "^5.0.0",
+    "ip-address": "^5.8.9",
     "js-crc": "^0.2.0",
+    "line-reader": "^0.4.0",
     "netaddr": "^1.1.0",
     "network": "^0.4.0",
+    "winston": "^3.0.0-rc3",
     "yargs": "^11.0.0"
   },
   "babel": {
@@ -56,6 +63,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "babel-watch": "^2.0.7",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11"
   }

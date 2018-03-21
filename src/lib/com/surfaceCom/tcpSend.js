@@ -168,7 +168,7 @@ const dotcp = (ip, port, message, settings, i) => {
 
             client.on('data', (data) => {
               //  console.timeEnd('tcp')
-                //console.log('data', data,Buffer(data).toString());
+              //  console.log('data', data,Buffer(data).toString());
                 client.destroy()
                 // console.timeEnd('tcp');
                 if (settings.log)
