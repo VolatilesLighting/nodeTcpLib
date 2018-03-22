@@ -30,6 +30,7 @@
     "chunk_size": 4096,
     "useHex": true,
     "timeout": 30000,
+    "timeoutLast": 300000,
     "delay": 2000,
     "retrys":10
   }

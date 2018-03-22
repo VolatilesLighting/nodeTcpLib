@@ -2,10 +2,12 @@ import {discover} from './discoverSurfaces';
 import {proxy} from './proxy/index.js';
 import {send} from './tcp.js';
 import {play} from './play.js';
+import update from './update.js';
+import downloadFirmware from './downloadFirmware.js';
+import {version} from '../package.json'
 import {tcpconfig} from './lib/com/config';
 
 require('yargs')
-
     .command('find [details]', 'find surfaces in wifi', (yargs) => {
     yargs
         .positional('details', {
@@ -15,6 +17,48 @@ require('yargs')
 
     }, (argv) => {
         discover(argv.details).catch(e => console.log(e))
+    })
+    .command('update [firmware] [ip] [masterKey] [mac]', 'update surfaces', (yargs) => {
+        yargs
+            .positional('firmware', {
+                describe: 'path to firmware',
+                default: false,
+                type: 'string'
+            })
+            .positional('mac', {
+
+                describe: 'mac address',
+                default: false
+            })
+            .positional('ip', {
+
+                describe: 'ip address',
+                default: false
+            })
+            .positional('masterKey', {
+                alias: 'mk',
+                describe: 'master key of surface',
+                default: false
+
+            })
+
+    }, (argv) => {
+        //console.log(argv)
+        update(argv).catch(e => console.log(e))
+    })
+    .command('getFirmware [id] [path]', 'download firmware', (yargs) => {
+        yargs
+            .positional('id', {
+                describe: 'show details',
+                default: 'latest'
+            })
+            .positional('path', {
+                describe: 'path to download firmware in filesystem',
+                default: 'latest'
+            })
+    }, (argv) => {
+       // console.log(argv)
+        downloadFirmware(argv).catch(e => console.log(e))
     })
     .command('proxy [mac] [masterKey] [visitorKey]', 'creat proxy for logging', (yargs) => {
     yargs
@@ -115,7 +159,9 @@ require('yargs')
         //send(argv.ip, {get_pub_info:null}, argv.key, argv.keyType, {}, {log:true}, argv.data)
          //send(argv.ip, JSON.parse(JSON.stringify(argv.command)), argv.key, argv.keyType, {}, {log:true}, argv.data)
 
-    }).argv
+    })
+    .version(version)
+    .argv
 
 
 

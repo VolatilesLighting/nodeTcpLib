@@ -1,45 +1,51 @@
-import tcpsend from './tcpSend';
-import readFileToChunks from '../../storage/filesystem/readFileToChunks';
+import tcpsend from './tcpsend';
+import readFileToChunks from '../../fs/readFileToChunks';
 import {adler32Hex} from '../../encrypt/adler32Hex';
 import path  from 'path';
-import {update as config} from '../config.json';
+import {update as config} from '../config.json'
 
 
-export default async(firmware, ip, key, updater, stoper) => {
+export default async(ip, key, fileIN, updater) => {
+    console.log(ip, key, fileIN)
     try {
         const
             key = key || config.key,
-            {chunks, size, file, name} = await readFileToChunks(firmware, config.chunk_size),
+            {chunks, size, file, name} = await readFileToChunks(resolveHome(fileIN), config.chunk_size),
             valPre = {
                 filename: name,
                 file_size: size,
                 file_adler32: adler32Hex(file),
-            }, setUpTcp = makeTcp(ip, "firmware_update", key, 'master', {}, {
+            },
+            setUpTcp = makeTcp(ip, "firmware_update", key, 'master', {}, {
                 log: true,
-                timeout: config.timeout,
-                delay: config.delay
+                timeout: 50000,
+                delay: 2000
             }, valPre);
-        //console.log(chunks,size,file,name)
+        console.log(valPre.file_adler32,chunks.length)
         const tcps = chunks.map((data, i) => {
+
             const val = {
                 chunk_nr: i,
                 chunk_length: data.length,
                 chunk_adler32: adler32Hex(data),
             };
+            //console.log(data.toString('hex'))
+            // console.log(valPre.file_adler32)
             return setUpTcp(val, data)
         });
-        const list = await geny(tcps, 0, 0, updater, stoper);
-        //console.log(list)
-        if (list[list.length - 1] === 'successful') {
-            return await getFirmwareVersion(ip, key);
+        const list = await geny(tcps, 0, 0, updater);
+        if(list[list.length-1] === 'successful'){
+            return  await getFirmwareVersion(ip,key);
         }
 
     } catch (e) {
-        throw {ip, error: e};
+        console.log(e)
+        throw {ip, error: e}
     }
 }
 
 function makeTcp(ip, command, key, keyType, done, opts, valpre) {
+    console.log(key)
     return (valIn, data = false) => {
         const newOpts = {
             ...opts
@@ -67,34 +73,33 @@ function makeTcp(ip, command, key, keyType, done, opts, valpre) {
     }
 }
 
-async function geny(array, ind, retrys, updater, stoper) {
+async function geny(array, ind, retrys ,updater) {
     try {
         if (array.length === ind)
             return ['done'];
-        if (stoper.stoped)
-            return ['stoped'];
+
         const res = await array[ind]();
-        //console.log(ind, res)
+        console.log(ind, res)
         if (Object.keys(res).includes('Error')) {
             updater(res['Error']);
             throw {err: res['Error'], index: ind};
         }
         updater(null, array.length, ind);
-        if (res.firmware_update === 'successful') {
+        if (res.firmware_update === 'successful'){
             return res.firmware_update;
         }
         const nextChunk = res.firmware_update.next_chunk_nr;
-        if (nextChunk === ind) {
-            if (retrys === config.retrys && !stoper.stoped)
+        if(nextChunk === ind){
+            if(retrys === config.retrys)
                 throw {err: 'retrys' + retrys, index: ind};
-            retrys = retrys + 1;
-        } else {
+            retrys  = retrys+1;
+        }else{
             retrys = 0
         }
-        const resChilds = await geny(array, nextChunk, retrys, updater, stoper);
+        const resChilds = await geny(array, nextChunk, retrys, updater);
         return [res].concat(resChilds);
     } catch (e) {
-        updater({err: e, i: ind})
+        console.log(e)
         throw [{err: e, i: ind}]
     }
 };
@@ -108,16 +113,16 @@ function resolveHome(filepath) {
 }
 
 
-async function getFirmwareVersion(ip, key) {
-    try {
+async function getFirmwareVersion(ip,key) {
+    try{
         const res = await tcpsend(ip, {get_surface_info: null}, key, 'master', {}, {})
         return res.firmware_version
     }
-    catch (e) {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve(getFirmwareVersion(ip, key));
-            }, 1000)
+    catch (e){
+        return new Promise(resolve =>{
+            setTimeout(()=>{
+                resolve(getFirmwareVersion(ip,key));
+            },1000)
         })
 
 

@@ -1,4 +1,3 @@
-import adler32 from 'adler32';
 
 export const adler32Hex = (data)=>{
     "use strict";
