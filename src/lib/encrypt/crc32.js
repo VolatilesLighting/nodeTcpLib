@@ -40,6 +40,10 @@ export default {
     validate: function (resp :string ) :Object{
         try {
             let response = JSON.parse(resp);
+            console.log(Buffer(resp).toString('hex'))
+            //  response.response.surface_runtime = 123;
+
+            console.log(response.crc32,crc32(JSON.stringify(response.response)))
             let isClean = parseInt(response.crc32, 16) === parseInt(crc32(JSON.stringify(response.response)), 16);
             if (!isClean) {
                 throw new Error(CONSTS.messages.CRC32)

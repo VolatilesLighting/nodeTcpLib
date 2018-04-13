@@ -3,6 +3,7 @@ import {proxy} from './proxy/index.js';
 import {send} from './tcp.js';
 import {play} from './play.js';
 import update from './update.js';
+import QR from './qr.js';
 import downloadFirmware from './downloadFirmware.js';
 import {version} from '../package.json'
 import {tcpconfig} from './lib/com/config';
@@ -46,7 +47,7 @@ require('yargs')
         //console.log(argv)
         update(argv).catch(e => console.log(e))
     })
-    .command('getFirmware [id] [path]', 'download firmware', (yargs) => {
+    .command('getFirmware [id] [path] [user] [password]', 'download firmware', (yargs) => {
         yargs
             .positional('id', {
                 describe: 'show details',
@@ -56,11 +57,19 @@ require('yargs')
                 describe: 'path to download firmware in filesystem',
                 default: 'latest'
             })
+            .positional('user', {
+                describe: 'username',
+                default: false,
+            })
+            .positional('password', {
+                describe: 'password',
+                default: false
+            })
     }, (argv) => {
        // console.log(argv)
         downloadFirmware(argv).catch(e => console.log(e))
     })
-    .command('proxy [mac] [masterKey] [visitorKey]', 'creat proxy for logging', (yargs) => {
+    .command('proxy [mac] [masterKey] [visitorKey]', 'create proxy for logging', (yargs) => {
     yargs
         .positional('mac', {
             alias: 'm',
@@ -80,6 +89,29 @@ require('yargs')
     }, (argv) => {
       //  console.log(argv)
         proxy(argv).catch(e => console.log(e))
+    })
+    .command('qr [mac] [key] [wifiPassword] [keyType]', 'print qr of surface', (yargs) => {
+    yargs
+        .positional('mac', {
+            alias: 'm',
+            describe: 'mac address of surface, eg. 0080....',
+            default: false
+        })
+        .positional('key', {
+            describe: 'key of surface',
+            default: false
+        })
+        .positional('wifiPassword', {
+            describe: 'wifi password of the surface',
+            default: false
+        })
+        .positional('keyType', {
+            describe: 'type of key',
+
+        })
+    }, (argv) => {
+      //  console.log(argv)
+        QR(argv)
     })
     .command('replay [file] [config] [mac] [ip] [masterKey] [visitorKey]', 'replay logged requests', (yargs) => {
         yargs

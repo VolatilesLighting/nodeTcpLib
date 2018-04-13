@@ -71,7 +71,7 @@ export default async(ip, message, key, keyType, done, settingsPre, data) => {
                     console.log(crc32.validate(Buffer(response).toString()));
                 return crc32.validate(Buffer(response).toString());
             } catch (e) {
-
+throw ee
             }
 
         } catch (e) {

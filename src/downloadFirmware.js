@@ -2,13 +2,20 @@ import download from './lib/com/download.js';
 
 
 
-export default async ({id,path}) =>{
+export default async ({id,path,user,password}) =>{
     try {
-        const creds = {
-            'user': 'florian.mair@volatiles.lighting',
-            'pass': '12345'
+        let creds = {
+            'user': 'firmware@volatiles.lighting',
+            'pass': 'HOLLYMOLLY'
         },
             filename = (path || '.')+'/'+ id;
+
+
+        if(user&& password)
+            creds = {
+                user,
+                pass: password
+            };
 
         const r = await download({
             uri: `https://staging-volasystems.de:8445/firmware/fetch/bin/${id}`,
